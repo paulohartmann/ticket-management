@@ -1,0 +1,49 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h4 class="card-title">Registration</h4>
+                      <p class="card-category">Complete your profile</p>
+                  </div>
+                  <div class="card-body">
+                        <form>
+                          <div class="row">
+                              <div class="col-md-10">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Name" type="text" name="userName" [(ngModel)]="user.userName">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-10">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Job Title" type="text" name="jobTitle" [(ngModel)]="user.jobTitle">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-10">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Email address" type="email" name="email" [(ngModel)]="user.email">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-10">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="user.password">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <button mat-raised-button type="cancel" class="btn btn-default pull-left" (click)="close()">Close</button>
+                          <button mat-raised-button type="submit" class="btn btn-primary pull-right" (click)="createUser()">Create</button>
+                          <div class="clearfix"></div>
+                        </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
