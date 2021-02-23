@@ -1,6 +1,11 @@
 package com.phlab.ticketmanagement.model;
 
+import com.phlab.ticketmanagement.config.security.UserRole;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 /*
@@ -9,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -32,7 +37,7 @@ public class User {
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private String userName;
+    private String name;
 
     @Column(
             name = "email",
@@ -53,10 +58,10 @@ public class User {
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private Role role;
+    private UserRole role;
 
     @Column(
-            name = "jobTitle",
+            name = "job_title",
             columnDefinition = "TEXT"
     )
     private String jobTitle;
@@ -64,8 +69,8 @@ public class User {
     @OneToMany(mappedBy = "createUser")
     private List<ProjectTicket> myProjectTickets;
 
-    public User(String userName, String email, String password, Role role, String jobTitle, List<ProjectTicket> myProjectTickets) {
-        this.userName = userName;
+    public User(String name, String email, String password, UserRole role, String jobTitle, List<ProjectTicket> myProjectTickets) {
+        this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -76,6 +81,36 @@ public class User {
     public User() {
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -84,12 +119,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -108,11 +143,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

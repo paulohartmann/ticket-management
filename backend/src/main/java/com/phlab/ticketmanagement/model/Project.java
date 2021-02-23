@@ -43,4 +43,14 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     private List<ProjectTicket> projectTickets;
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
+                ", creationDate=" + creationDate +
+                ", projectTickets=" + projectTickets +
+                '}';
+    }
 }

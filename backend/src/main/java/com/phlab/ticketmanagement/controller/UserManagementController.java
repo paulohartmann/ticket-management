@@ -14,25 +14,26 @@ import java.util.List;
  * Date: 17/02/21
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("management/api/user")
+public class UserManagementController {
 
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserManagementController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user){
-        User newUser = userService.addUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    @GetMapping(path = "{userId}")
+    public ResponseEntity<User> findUserById(@PathVariable("userId") Long id){
+        User user = userService.FindById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAllUsers(){
+    public ResponseEntity<List<User>> findAll(){
         List<User> users = userService.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
 }
