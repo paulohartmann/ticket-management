@@ -44,6 +44,15 @@ public class Project {
     @OneToMany(mappedBy = "project")
     private List<ProjectTicket> projectTickets;
 
+    public Project(String projectName, LocalDate creationDate, List<ProjectTicket> projectTickets) {
+        this.projectName = projectName;
+        this.creationDate = creationDate;
+        this.projectTickets = projectTickets;
+    }
+
+    public Project() {
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -52,5 +61,37 @@ public class Project {
                 ", creationDate=" + creationDate +
                 ", projectTickets=" + projectTickets +
                 '}';
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public List<ProjectTicket> getProjectTickets() {
+        return projectTickets;
+    }
+
+    public void setProjectTickets(List<ProjectTicket> projectTickets) {
+        this.projectTickets = projectTickets;
     }
 }

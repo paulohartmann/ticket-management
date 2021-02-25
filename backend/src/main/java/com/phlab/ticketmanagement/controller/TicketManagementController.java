@@ -6,18 +6,17 @@ package com.phlab.ticketmanagement.controller;
  */
 
 import com.phlab.ticketmanagement.model.ProjectTicket;
+import com.phlab.ticketmanagement.utils.ErrorHandler;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/management/api/ticket")
-public class TicketManagementController {
+public class TicketManagementController extends ErrorHandler {
 
-
-    //, @RequestBody ProjectTicket ticket
     @PutMapping(path = "{ticketId}")
     @PreAuthorize("hasAuthority('ticket:update')")
-    public String editTicket(@PathVariable("ticketId") Long ticketId){
+    public String editTicket(@PathVariable("ticketId") Long ticketId, @RequestBody ProjectTicket ticket){
         return "management ticket edit";
     }
 

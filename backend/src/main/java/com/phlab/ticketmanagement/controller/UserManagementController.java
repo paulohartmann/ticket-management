@@ -2,6 +2,7 @@ package com.phlab.ticketmanagement.controller;
 
 import com.phlab.ticketmanagement.model.User;
 import com.phlab.ticketmanagement.service.UserService;
+import com.phlab.ticketmanagement.utils.ErrorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("management/api/user")
-public class UserManagementController {
+public class UserManagementController extends ErrorHandler {
 
     private final UserService userService;
 

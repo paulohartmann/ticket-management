@@ -14,13 +14,26 @@ import org.springframework.web.bind.annotation.*;
 public class TicketController {
 
     @PostMapping
-    public String addTicket(@RequestBody ProjectTicket ticket){
+    @PreAuthorize("hasAnyRole('DEFAULT, MANAGER, ADMIN')")
+    public String addTicket(@RequestBody ProjectTicket ticket) {
         return "added";
     }
 
     @GetMapping(path = "{userId}")
     @PreAuthorize("hasAnyRole('DEFAULT, MANAGER, ADMIN')")
-    public String FindTicketsByUserId(@PathVariable Long userId){
-        return "List of user tickets";
+    public String FindTicketsByUserId(@PathVariable Long userId) {
+        return "List of Tickets from user";
+    }
+
+    @GetMapping(path = "{ticketId}")
+    @PreAuthorize("hasAnyRole('DEFAULT, MANAGER, ADMIN')")
+    public String FindTicketsByTicketId(@PathVariable Long ticketId) {
+        return "ticket from ticketId";
+    }
+
+    @GetMapping(path = "{projectId}")
+    @PreAuthorize("hasAnyRole('DEFAULT, MANAGER, ADMIN')")
+    public String FindTicketsByProjectId(@PathVariable Long projectId) {
+        return "List of tickets from project";
     }
 }
