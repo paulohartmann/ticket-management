@@ -25,14 +25,18 @@ public class ProjectManagemenController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('project:create')")
-    public ResponseEntity<?> addProject(@RequestBody Project project){
+    public ResponseEntity<Project> addProject(@RequestBody Project project){
+
         Project p = projectService.addProject(project);
         return new ResponseEntity<>(p, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "{projectId}")
     @PreAuthorize("hasAuthority('project:update')")
-    public String editProject(@PathVariable("projectId") Long id, @RequestBody Project project){
-        return "edit project id: " + id +  ":"+ project.toString();
+    public ResponseEntity<Project> editProject(@PathVariable("projectId") Long id, @RequestBody Project project){
+
+        Project p = projectService.updateProject(id, project);
+        return new ResponseEntity<>(p, HttpStatus.OK);
+
     }
 }

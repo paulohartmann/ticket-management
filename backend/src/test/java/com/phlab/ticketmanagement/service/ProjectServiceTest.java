@@ -45,7 +45,7 @@ public class ProjectServiceTest {
 
         //when
         //underTest.addProject(projectToSave);
-        projectDao.save(projectToSave);
+        underTest.addProject(projectToSave);
 
         //then
         then(projectDao).should().save(projectArgumentCaptor.capture());
@@ -62,5 +62,58 @@ public class ProjectServiceTest {
         assertThatThrownBy(() -> underTest.addProject(projectToSave))
                 .hasMessageContaining("Project Name is obligatory")
                 .isInstanceOf(ResponseStatusException.class);
+    }
+
+    @Test
+    void shouldUpdateProject(){
+        //given
+        Long id = 1L;
+        Project mockProject = new Project("Mock", LocalDate.now(), null);
+        mockProject.setProjectId(id);
+        Project toUpdate = new Project("New Project", LocalDate.now(), null);
+        toUpdate.setProjectId(id);
+
+        //when
+        given(projectDao.getOne(id)).willReturn(mockProject);
+        underTest.updateProject(id, toUpdate);
+
+        //Then
+        then(projectDao).should().save(projectArgumentCaptor.capture());
+        Project projectCaptorValue = projectArgumentCaptor.getValue();
+
+        assertThat(projectCaptorValue).usingRecursiveComparison().isEqualTo(toUpdate);
+
+    }
+
+    @Test
+    void shouldNotUpdateProjectWithEmpryName(){
+        //given
+        Long id = 1L;
+        Project toUpdate = new Project("", LocalDate.now(), null);
+        toUpdate.setProjectId(id);
+        //then
+        assertThatThrownBy(() -> underTest.updateProject(1l, toUpdate))
+                .hasMessageContaining("Project Name is obligatory")
+                .isInstanceOf(ResponseStatusException.class);
+
+    }
+
+    @Test
+    void shouldNotUpdateProjectWhenProjectNotFound(){
+        //given
+        Long id = 1L;
+        Project mockProject = new Project("Mock", LocalDate.now(), null);
+        mockProject.setProjectId(0l);
+        Project toUpdate = new Project("New Project", LocalDate.now(), null);
+        toUpdate.setProjectId(id);
+
+        //when
+        given(projectDao.getOne(id)).willReturn(mockProject);
+
+        //then
+        assertThatThrownBy(() -> underTest.updateProject(1l, toUpdate))
+                .hasMessageContaining("Project not found")
+                .isInstanceOf(ResponseStatusException.class);
+
     }
 }
