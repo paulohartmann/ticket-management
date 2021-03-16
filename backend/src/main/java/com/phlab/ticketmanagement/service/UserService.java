@@ -38,6 +38,7 @@ public class UserService {
         if (user.getPassword().isEmpty() || user.getPassword().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password is obligatory");
         }
+        //TODO check if email already exist
         user.setPassword(encoder.encode(user.getPassword()));
         return userDao.save(user);
     }

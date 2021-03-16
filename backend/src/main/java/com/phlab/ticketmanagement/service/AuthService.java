@@ -1,8 +1,6 @@
 package com.phlab.ticketmanagement.service;
 
-import com.phlab.ticketmanagement.config.security.jwt.JwtUtils;
-import com.phlab.ticketmanagement.config.security.service.UserDetailsImpl;
-import com.phlab.ticketmanagement.model.payload.LoginRequest;
+import com.phlab.ticketmanagement.model.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

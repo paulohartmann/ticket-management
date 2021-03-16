@@ -1,4 +1,4 @@
-package com.phlab.ticketmanagement.model.payload;
+package com.phlab.ticketmanagement.model;
 
 import java.util.List;
 
